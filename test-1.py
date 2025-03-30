@@ -5,9 +5,8 @@ import unittest
 from datetime import datetime, timedelta
 from typing import List, Optional, Dict
 
-# =======================
-# 1️⃣ Class Member - คลาสสำหรับจัดการข้อมูลสมาชิก
-# =======================
+# Class Member - คลาสสำหรับจัดการข้อมูลสมาชิก
+
 class Member:
     def __init__(self, member_id: str, name: str, contact_info: str):
         # เก็บข้อมูลพื้นฐานของสมาชิก
@@ -35,9 +34,9 @@ class Member:
             timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             self.update_history.append(f"[{timestamp}] " + ", ".join(changes))
 
-# =======================
-# 2️⃣ Abstract Class Publication - คลาสแม่สำหรับสิ่งพิมพ์ทุกประเภท
-# =======================
+
+# Abstract Class Publication - คลาสแม่สำหรับสิ่งพิมพ์ทุกประเภท
+
 class Publication(ABC):
     def __init__(self, title: str, author: str, year: int):
         # ข้อมูลพื้นฐานของสิ่งพิมพ์
@@ -55,9 +54,9 @@ class Publication(ABC):
         # Method สำหรับระบุประเภทของสิ่งพิมพ์
         pass
 
-# =======================
-# 3️⃣ Class Book - คลาสสำหรับจัดการหนังสือ (สืบทอดจาก Publication)
-# =======================
+
+# Class Book - คลาสสำหรับจัดการหนังสือ (สืบทอดจาก Publication)
+
 class Book(Publication):
     def __init__(self, title: str, author: str, year: int, ISBN: str, genre: str):
         # เรียกใช้ constructor ของ parent class
@@ -73,9 +72,9 @@ class Book(Publication):
     def get_type(self) -> str:
         return "Book"
 
-# =======================
-# 4️⃣ Class Loan - คลาสสำหรับจัดการการยืม-คืน
-# =======================
+
+# Class Loan - คลาสสำหรับจัดการการยืม-คืน
+
 class Loan:
     def __init__(self, member: Member, publication: Publication, loan_date: str, due_date: str):
         # เก็บข้อมูลการยืม
@@ -90,9 +89,9 @@ class Loan:
         status = "Returned" if self.returned else "Active"
         return f"{self.publication.display()} loaned to {self.member.name} from {self.loan_date} to {self.due_date} - {status}"
 
-# =======================
-# 5️⃣ Class Library - คลาสหลักสำหรับจัดการระบบห้องสมุด
-# =======================
+
+# Class Library - คลาสหลักสำหรับจัดการระบบห้องสมุด
+
 class Library:
     def __init__(self):
         # สร้าง lists สำหรับเก็บข้อมูล
@@ -207,9 +206,9 @@ class Library:
             "update_history": member.update_history
         }
 
-# =======================
-# 6️⃣ GUI Application - ส่วนติดต่อผู้ใช้
-# =======================
+
+# GUI Application - ส่วนติดต่อผู้ใช้
+
 class LibraryApp:
     def __init__(self, root):
         self.library = Library()  # สร้าง instance ของระบบห้องสมุด
@@ -460,9 +459,9 @@ class LibraryApp:
                 loan.publication.title
             ))
 
-# =======================
-# 7️⃣ Unit Tests - การทดสอบการทำงาน
-# =======================
+
+# Unit Tests - การทดสอบการทำงาน
+
 class LibraryTests(unittest.TestCase):
     def setUp(self):
         # เตรียมข้อมูลสำหรับการทดสอบ
@@ -488,9 +487,9 @@ class LibraryTests(unittest.TestCase):
         self.assertEqual(len(self.library.loans), 1)
         self.assertFalse(self.library.loans[0].returned)
 
-# =======================
-# 8️⃣ Run Application - เริ่มการทำงานของโปรแกรม
-# =======================
+
+# Run Application - เริ่มการทำงานของโปรแกรม
+
 if __name__ == "__main__":
     # รัน unit tests ก่อน
     unittest.main(argv=['first-arg-is-ignored'], exit=False)
